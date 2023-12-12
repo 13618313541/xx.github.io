@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome To My World</title> 
+    <style type="text/css"> 
+        /*最外侧边框*/
+        body {
+            margin: 0;
+            padding: 0;
+			/*background-image: url("background.gif");*/
+			background-size: cover;
+            height: 1500px;
+            border: 12px solid #000000; 
+        }
+        /*头部图片以及倾斜标题*/
+        #header {
+            height: 150px;
+            background-image: url("11.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #title {
+    text-align: left;
+    padding-top: 10px;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 20px;
+    font-size: 42px;
+        }
+        /*自动实现图片切换*/
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 800px;
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /*图片上透明介绍框*/
+        .slide .caption {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+        /*手动控制图片切换*/
+        .slideshow-controls {
+    position: absolute;
+    bottom: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+    
+        }
+
+        .slideshow-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            padding: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+
+        .slideshow-control:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+	<script>
+			function resetForm(){
+				lab1.innerHTML="";
+				lab2.innerHTML="";
+				lab3.innerHTML="";
+				t1.focus();
+			}
+				
+			function chkForm(){
+				s1 = t1.value;				
+				p1 = new RegExp("^[1-3][0-9]{9}$","g");
+				r1 = p1.test(s1);
+				if(r1){	
+					lab1.innerHTML="学号通过验证。";
+					lab1.style.color = "#006600";
+				}
+				else{
+					lab1.innerHTML="学号填写错误！";
+					lab1.style.color = "#880000";
+					t1.select();
+					return false;
+				}
+				
+				s2 = t2.value;
+				p2 = /^[\u4E00-\u9FA5]{2,12}$/g;
+				r2 = p2.test(s2);
+				if(r2){
+					lab2.innerHTML="姓名通过验证。";
+					lab2.style.color = "#006600";
+				}
+				else{
+					lab2.innerHTML="姓名填写错误！";
+					lab2.style.color = "#880000";
+					t2.select();
+					return false;
+				}
+				</script>
+</head>
+<body>
+    <div id="header"></div>
+    <h1 id="title"><em>The Personal Blog Of Jou</em></h1> 
+    <div class="slideshow-container">
+        <div class="slide active">
+            <a href="a.png">
+            <img src="a.png" alt="Image 1"></a>
+            <div class="caption">
+                <h3>自我介绍</h3>
+                <p>Hello, World!</p>
+            </div>
+        </div>
+        <div class="slide">
+            <a href="b.png">
+            <img src="b.png" alt="Image 2"></a>
+            <div class="caption">
+                <h3>Image 2</h3>
+                <p>Description for Image 2</p>
+            </div>
+        </div>
+        <div class="slide">
+            <a href="c.png">
+            <img src="c.png" alt="Image 3"></a>
+            <div class="caption">
+                <h3>Image 3</h3>
+                <p>Description for Image 3</p>
+            </div>
+        </div>
+        <div class="slideshow-controls">
+            <div class="slideshow-control" onclick="previousSlide()">&#10094;</div>
+            <div class="slideshow-control" onclick="nextSlide()">&#10095;</div>
+        </div>
+    </div>
+<div><h1>访客信息</h1>
+	<form id="f1" action="20220902_0001.png" onreset="resetForm()">
+			<label>学号：</label>
+			<input type="text" id="t1" size="20" />
+			<label id="lab1"></label>
+			
+			<br/><br/>
+			<label>姓名：</label>
+			<input type="text" id="t2" size="20" />
+		<label id="lab2"></label>	
+			<br/><br/>
+			<input type="reset"  value="重置" />
+			<input type="submit" value="确定" />
+		</form>
+	</div>
+    <script>
+        var slides = document.querySelectorAll('.slide');
+        var currentSlide = 0;
+        var slideInterval = setInterval(nextSlide, 5000); // 切换图片的时间间隔，单位为毫秒
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            slides[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            var newIndex = (currentSlide + 1) % slides.length;
+            showSlide(newIndex);
+        }
+
+        function previousSlide() {
+            var newIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(newIndex);
+        }
+    </script>
+	<script type="text/javascript">
+			document.getElementById("f1").onsubmit = chkForm;
+		</script>
+	
+	
+</body>
+</html>
